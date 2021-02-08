@@ -50,4 +50,14 @@ namespace websockets {
 
     #define WSDefaultTcpClient websockets::network::Teensy41TcpClient
     #define WSDefaultTcpServer websockets::network::Teensy41TcpServer    
+
+#elif defined(__STM32F1__) || defined (__STM32F4__)
+    #define PLATFORM_DOES_NOT_SUPPORT_BLOCKING_READ
+    #define _WS_CONFIG_NO_SSL
+
+    #include <tiny_websockets/network/stm32/stm32_tcp_client.hpp>
+    #include <tiny_websockets/network/stm32/stm32_tcp_server.hpp>
+
+    #define WSDefaultTcpClient websockets::network::STM32TcpClient
+    #define WSDefaultTcpServer websockets::network::STM32TcpServer    
 #endif
